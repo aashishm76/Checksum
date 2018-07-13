@@ -7,8 +7,14 @@
 // Main Program
 int main(int argc, char const *argv[])
 {
-  // Read in text files
+  // Take in command line args
+  char *argv1;
 
-  
+  argv1 = argv[1];
+
+
+  // Read in text files
+  while (fscanf())
+
   return 0;
 }
