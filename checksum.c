@@ -33,4 +33,19 @@ int main(int argc, char const *argv[])
   return 0;
 }
 
-int checksum8()
+int checksum8(char *inputfile)
+{
+  // Open the file and read it here
+  FILE *inputFile = NULL;
+  inputFile = fopen(inputFile, "r");
+
+  // Loop and read the file
+  while (!EOF)
+  {
+    char c = fgetc(inputFile);
+
+  }
+
+
+  fclose(inputFile);
+}
