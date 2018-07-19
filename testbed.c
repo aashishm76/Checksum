@@ -1,18 +1,14 @@
-// Checksum Program
-// Aashish Madamanchi
+// Testbed for your code
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<ctype.h>
-
-// Helper functions
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 int checksum8(char *file)
 {
-  int c;
+  int c, counter = 0;
   unsigned int letter = 0;
-  unsigned int finalresult;
+  int finalresult;
 
   // Open the file and read it here
   FILE *inputFile = NULL;
@@ -22,10 +18,12 @@ int checksum8(char *file)
   while((c = fgetc(inputFile)) != EOF)
   {
     letter = c + letter;
-    printf("%u\n", letter);
+    counter++;
   }
 
-  finalresult = letter % (2^8);
+  printf("There's %d characters in the file", counter);
+  printf("letter value: %d\n", letter);
+  finalresult = letter % 256;
 
   // Close file and return out of function
   fclose(inputFile);
@@ -49,13 +47,11 @@ int characterCounter(char *file)
 }
 
 
-
-// Main Program
 int main(int argc, char const *argv[])
 {
   char *inputFile;
   const char *checksumVal;
-  int charCount = 0;
+  int charCount;
 
   // Capture input arguments
   inputFile = malloc(sizeof(char) * strlen(argv[1]));
@@ -64,28 +60,16 @@ int main(int argc, char const *argv[])
   inputFile = argv[1];
   checksumVal = argv[2];
 
-  printf("File Name: %s\n", inputFile);
-  printf("Checksum Number: %s\n", checksumVal);
-
-  // Check if the argument value passed in is either 8, 16, 32 bits
   if(checksumVal[0] == '8')
   {
     printf("ENTERED 8 BIT CHECKSUM\n");
     unsigned int result;
     charCount = characterCounter(inputFile);
     result = checksum8(inputFile);
-    printf("8 bit checksum is %x for all %d characters\n", result, charCount);
+    printf("Result: %x with %d characters\n", result, charCount);
   }
-  else if (checksumVal[0] == '1' && checksumVal[1] == '6')
-  {
-    //
-  }
-  else if (checksumVal[0] == '3' && checksumVal[1] == '2')
-  {
-    // Run the checksum 32 function
-  }
-  else {
-    printf("Valid checksum sizes are 8, 16, or 32\n");
+  else{
+    return 0;
   }
 
   return 0;
