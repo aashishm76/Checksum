@@ -46,12 +46,34 @@ int characterCounter(char *file)
   return counter;
 }
 
+char *fileHandler(char *file)
+{
+  int i = 0;
+  char letter;
+  char *text;
+
+  FILE *inputFile = NULL;
+  inputFile = fopen(file, "r");
+  text = malloc(sizeof(char) * 512);
+
+  while(1)
+  {
+    letter = fgetc(inputFile);
+    text[i++] = letter;
+    if (feof(inputFile))
+      break;
+  }
+
+  printf("Text is: %s\n", text);
+  fclose(inputFile);
+  return text;
+}
 
 int main(int argc, char const *argv[])
 {
-  char *inputFile;
+  char *inputFile, *fileHandlerOutput;
   const char *checksumVal;
-  int charCount;
+  int charCount, checksumNum;
 
   // Capture input arguments
   inputFile = malloc(sizeof(char) * strlen(argv[1]));
@@ -60,9 +82,15 @@ int main(int argc, char const *argv[])
   inputFile = argv[1];
   checksumVal = argv[2];
 
-  if(checksumVal[0] == '8')
+  // Convert the string to a Number
+  checksumNum = atoi(checksumVal);
+  printf("%d\n", checksumNum);
+
+  if(checksumNum == 8)
   {
     printf("ENTERED 8 BIT CHECKSUM\n");
+    fileHandlerOutput = fileHandler(inputFile);
+    printf("FileHandlerOutput Function: %s\n", fileHandlerOutput);
     unsigned int result;
     charCount = characterCounter(inputFile);
     result = checksum8(inputFile);

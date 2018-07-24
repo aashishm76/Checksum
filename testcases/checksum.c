@@ -153,7 +153,6 @@ int main(int argc, char const *argv[])
   // Convert the string to a number
   checksumNum = atoi(checksumVal);
 
-  // Run the file handler to process the file and store it into an array
   fileHandlerOutput = malloc(sizeof(char) * MAX_CHARACTERS);
 
   // Check if the argument value passed in is either 8, 16, 32 bits
